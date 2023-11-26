@@ -24,7 +24,7 @@ class BasicInstallTest(unittest.TestCase):
     def test_home_page_blog(self):
         self.browser.get("http://127.0.0.1:8000")
         # Под шапкой расположен блог со статьями
-        article_list = self.browser.find_element(By.CLASS_NAME, "article-list")
+        article_list = self.browser.find_element(By.CLASS_NAME, "article_list")
         self.assertTrue(article_list)
 
     def test_home_page_articles_look_correct(self):

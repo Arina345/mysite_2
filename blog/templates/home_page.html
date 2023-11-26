@@ -1,0 +1,18 @@
+<html>
+    <title>Сайт Арины Крикуновой</title>
+    <h1>Арина Крикунова</h1>
+
+    <div class="article_list">
+
+        {% for article in articles %}
+            <div class="article_list">
+                <h2 class="article_title">{{article.title}}</h2>
+                <p class="article_summary">{{article.summary}}</p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+</html>
