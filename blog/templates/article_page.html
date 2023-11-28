@@ -4,11 +4,14 @@
 
 
 {% block content  %}
-
-            <div class="article_list">
-                <h2 class="article_title">{{article.title}}</h2>
-                <p class="article_summary">{{article.full_text}}</p>
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="article_list">
+                    <h1 class="article_title">{{article.title}}</h1>
+                    <p class="article_summary">{{article.full_text | safe}}</p>
+                </div>
             </div>
+        </div>
 
 {% endblock  %}
 
