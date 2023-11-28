@@ -1,20 +1,39 @@
-<html>
-    <title>Сайт Арины Крикуновой</title>
-    <h1>Арина Крикунова</h1>
 
-    <div class="article_list">
+{% extends 'base.html' %}
 
-        {% for article in articles %}
-            <div class="article_list">
-                <h2 class="article_title">
-                    <a href="/blog/{{article.slug}}">{{article.title}}</a>
-                </h2>
-                <p class="article_summary">{{article.summary}}</p>
+{% block title%}Сайт Арины Крикуновой{%endblock%}
+
+
+{% block content  %}
+
+    <div class="container">
+        <div class="blog">
+            <div class="row">
+                <div class="col">
+                    <div class="avatar_name">Арина Крикунова</div>
+                </div>
             </div>
-        {% endfor %}
-
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="article_list">
+                        {% for article in articles %}
+                        <div class="article">
+                            <h2 class="article_title">
+                                <a href="{{ article.get_absolute_url }}">{{article.title}}</a>
+                            </h2>
+                            <p class="article_summary">{{article.summary}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
-</html>
+    
+{% endblock  %}
+
+
+

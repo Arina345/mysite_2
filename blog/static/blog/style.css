@@ -1,0 +1,55 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 18px;
+}
+
+
+body {
+  color: #333;
+  font-family: graphik-regular, Arial, Helvetica, sans-serif;
+  margin-bottom: 60px; /* Margin bottom by footer height */
+  line-height: 1.4rem;
+}
+
+.article {
+  margin-bottom: 3em;
+}
+
+.article_title {
+  margin-bottom: 1em;
+  font-weight: 600;
+  margin-top: 2em;
+}
+
+.article_title a {
+  text-decoration: none;
+  color: #F0E68C;
+}
+
+.article_title a:hover {
+  color: #555;
+}
+
+.article-footer {
+  margin-top: 2em;
+  font-size: .8em;
+}
+
+.article-footer a {
+  color: #333;
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.article-footer a:hover {
+  color: #777;
+  
+}
+
+.avatar_name{
+  font-weight: 800;
+}
+
+
+
