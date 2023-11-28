@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title%}Сайт Арины Крикуновой{%endblock%}
 
 
 {% block content  %}
 
-    <h1>Арина Крикунова</h1>
-
             <div class="article_list">
                 <h2 class="article_title">{{article.title}}</h2>
                 <p class="article_summary">{{article.full_text}}</p>
             </div>
-
 
 {% endblock  %}
 
