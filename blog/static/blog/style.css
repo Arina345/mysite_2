@@ -5,89 +5,320 @@ html {
 }
 
 
-
-
-body{
-  color:#333;
+body {
+  min-width: 1400px;
+  color: #333;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #F4F5F6;
-  margin-bottom: 60px;
+  margin-bottom: 60px; /* Margin bottom by footer height */
+  line-height: 1.4rem;
+  background-color: #F9F9FF;
 }
 
-div.container-lg {
-  padding-left: 1em;
-  padding-right: 2em;
+.container-lg{
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-.page-header{
-  height: 9em;
-  margin-left: -22px;
 
+.page-header {
+  height: 5rem;
+  margin-left: -20px;
 }
 
-h1,h2,h2{
-  font-weight: 600;
+.page-header::after {
+  display: table;
+  clear: both;
+  content: "";
+}
 
+
+
+h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  /* line-height: 1.7rem; */
+}
+
+h4 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+h1 {
+  font-size: 2em;
+  line-height: 26px;
 }
 
 h2 {
-  font-size: 1.4em;
-}
-h3 {
+  margin-top: 2em;
+  margin-bottom: 1em;
   font-size: 1.3em;
 }
 
-h4,h5,h6 {
+h3 {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  font-size: 1.05em;
+}
+
+h4, h5, h6 {
   font-size: 1em;
 }
 
-h1.avatar-top{
+.avatar-top {
   margin-top: 2em;
   font-size: 0.8em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1.avatar-top img{
+.avatar-top a {
+  text-decoration: none;
+  color: #333
+}
+
+.avatar-top a:hover {
+  text-decoration: none;
+  color: #9AFF5D;
+}
+
+
+
+
+.avatar-top img {
   width: 32px;
   margin-right: .2em;
-  clip-path: circle(24px at center);
-  margin-top: -10px;
+  clip-path: circle(25px at center);
+  margin-top: -3px;
+  vertical-align: middle;
 }
 
-.article{
-  margin-bottom: 2em;
-}
-
-h2.article_title{
-  margin-bottom: .2em;
+.author-name{
+  font-weight: bold;
 
 }
 
 
-h2.article_title a{
-  text-decoration: none;
-  color: #333;
-}
-
-h2.article_title a:hover{
-  color: #565EEF;
+.blog_content{
+  display: inline-block;
+  vertical-align: middle;
+  width: 126px;
+  line-height: 18px;
   
 }
 
 
-@media only screen and (max-width: 960px){
 
+
+.path_category{
+  width: 100%;
+  float: left;
+  height: 25px;
 }
 
+.path_category::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+
+
+p.path{
+  font-size: 12px;
+  color:#999 ;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+p.path a{
+  text-decoration: none;
+  color:#999 ;
+}
+
+p.path a:hover{
+  color:#999 ;
+}
+
+
+/* Условие */
+
+
+.analytics{
+  padding: 28px;
+  width: 100%;
+  height: 265px;
+  border-radius: 24px;
+  border: 1px solid red;
+}
+
+.analytics .image_analytics{
+  border: 1px solid red;
+  width: 20%;
+  height: auto;
+}
+
+
+h1.category_analytics{
+  color: #F95656;
+  font-weight: 700;
+  font-size: 34px;
+}
+
+
+p.category_analytics{
+
+  margin: 0;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* то во что упакован заголовок с подзаголовком */
+.article {
+  background-color: #fff;
+  width: 325px;
+  padding: 20px;
+  height: 465px;
+  border-radius: 24px;
+  box-shadow: 0 2px 8px 0 rgb(233, 233, 233,0.7);
+  margin-bottom: 60px;
+  
+}
+/* дата публикации*/
+p.article_pubdate{
+  font-size: 14px;
+  color: #999;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+/* о чем статья*/
+p.article_summary{
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #333;
+}
+
+p.article_category{
+  font-size: 14px;
+  color:#565EEF;
+  font-weight: 100;
+}
+
+
+
+
+/* заголовок */
+h1.article_title{
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 14px;
+}
+
+
+
+/* картинка */
+.article img{
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+}
+
+.article a{
+  text-decoration: none;
+  color:#333
+}
+
+
+.article  a:hover{
+  color: #565EEF;
+}
+
+
+
+.conteiner_article{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Подвал */
+
 .footer {
+  /* position: absolute; */
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #efefef;
+  height: 80px; 
+  line-height: 60px; 
+  background-color: #E2E4FF;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: .7em;
+  font-size: 12px;
   font-weight: 600;
-  color: #555;
+  color: #393B3C;
 }
 
+
+.footer-author{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-icon-github{
+  vertical-align: middle;
+  float: right;
+  margin-top: 18px;
+}

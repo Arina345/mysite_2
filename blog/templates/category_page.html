@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category }}{% endblock %}
+
+
+
+{% block content  %}
+<div class="conteiner_article">
+    <div class="path_category">
+        <p class="path"><a href="{%url 'home_page' %}">Главная</a> / {{category}}</p>
+    </div>
+        {% if category == 'Аналитика'%}
+
+            <div class="analytics">
+                <h1 class="category_analytics">Аналитика</h1>
+                <p class="category_analytics">Разбираем инструменты аналитики и основы профессии</p>
+                <img class="image_analytics" src="{% static 'img/analytics.jpg' %}" alt="analytics">
+            </div>
+        {% endif%}
+            <div class="article_list">
+                {% for article in articles %}
+                <div class="article">
+                    <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
+                        <p class="article_pubdate">{{article.pubdate|date:"j M Y"}}</p>
+                        
+                        <a href="{{ article.get_absolute_url }}">
+                            <h1 class="article_title">
+                            {{article.title | safe}}
+                            </h1>
+                        </a>
+                    <p class="article_summary">{{article.summary| safe}}</p>
+                    <a href="{{article.get_category_url}}"><p class="article_category">#{{article.category}}</p></a>
+                </div>
+            </div>
+            {% endfor %}    
+</div>
+
+{% endblock  %}
+

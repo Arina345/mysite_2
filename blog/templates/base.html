@@ -1,35 +1,46 @@
 {% load static %}
 
-<html>
-    <head>
-        <title>{% block title %}Сайт Арины Крикуновой{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'blog/style.css' %}">
-    </head>
+<html lang="ru">
+<head>
 
-    <body>
-        <div class="container">
-            <div class="row page-header">
-                <div class="col">
-                    <h1 class="avatar-top">
-                        <img src="{% static 'img/avatar.jpg' %}" alt="avatar">
-                        <span class="author_name">Арина Крикунова</span>
-                    </h1>
+    <title>{% block title %}Сайт Арины Крикуновой{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+
+</head>
+
+<body>
+    <div class="container-lg">
+        <div class="row page-header">
+                <div class="avatar-top">
+                    {% block page_header %}
+                    <a href="{% url 'home_page' %}">
+                        <img src="{% static 'img/avatar.jpg' %}" />
+                        <div class="blog_content">
+                            <span class="author-name">Арина Крикунова</span>
+                            <span class="blog-type">IT-Журнал</span>
+                        </div>
+                    </a>
+                    
+                    {% endblock %}
                 </div>
             </div>
-            {% block content  %}
-            {% endblock  %}
-        </div>
-
-        <footer class="footer">
-            <div class="container-lg">
-                <span class="text_muted">© Арина Крикунова</span>
-                {{ author_name }} {% now "Y" %}
+        {% block content %}
+        {% endblock %}
+    </div>
+<footer class="footer">
+    <div class="container-lg">
+        <div class="footer-top">
+            <div class="footer-author ">
+                <p>© Арина Крикунова {% now "Y" %}</p>   
             </div>
-        </footer>
-          
-
-
-    </body>
+            <a class="footer-icon-github" href="https://github.com/Arina345/mysite_2.git"><img src="{% static 'img/github.png'%}" alt="github"></a> 
+                
+        </div>
+    </div>     
+</footer>
+</body>
 </html>
+
+
 

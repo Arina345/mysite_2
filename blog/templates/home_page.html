@@ -1,31 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title%}Сайт Арины Крикуновой{%endblock%}
 
 
 {% block content  %}
-
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <div class="article_list">
-                        {% for article in articles %}
-                        <div class="article">
-                            <h2 class="article_title">
-                                <a href="{{ article.get_absolute_url }}">{{article.title}}</a>
-                            </h2>
-                            <p class="article_summary">{{article.summary}}</p>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+<div class="container_article">
+        <div class="article_list">
+            {% for article in articles %}
+            <div class="article">
+                <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
+                    <p class="article_pubdate">{{article.pubdate|date:"j M Y"}}</p>
+                    
+                    <a href="{{ article.get_absolute_url }}">
+                        <h1 class="article_title">
+                        {{article.title | safe}}
+                        </h1>
+                    </a>
+                <p class="article_summary">{{article.summary| safe}}</p>
+                <a href="{{article.get_category_url}}"><p class="article_category">#{{article.category}}</p></a>
             </div>
+        </div>
+        {% endfor %}    
+</div>
 
-
-
-
-    
 {% endblock  %}
-
 
 
