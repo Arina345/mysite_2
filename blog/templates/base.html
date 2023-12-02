@@ -12,17 +12,18 @@
 <body>
     <div class="container-lg">
         <div class="row page-header">
-                <div class="avatar-top">
-                    {% block page_header %}
-                    <a href="{% url 'home_page' %}">
-                        <img src="{% static 'img/avatar.jpg' %}" />
-                        <div class="blog_content">
-                            <span class="author-name">Арина Крикунова</span>
-                            <span class="blog-type">IT-Журнал</span>
-                        </div>
-                    </a>
-                    
-                    {% endblock %}
+            <div class="col">
+                    <div class="avatar-top">
+                        {% block page_header %}
+                        <a href="{% url 'home_page' %}">
+                            <img src="{% static 'img/avatar.jpg' %}" />
+                            <div class="blog_content">
+                                <span class="author-name">Арина Крикунова</span>
+                                <span class="blog-type">IT-Журнал</span>
+                            </div>
+                        </a>
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
         {% block content %}
@@ -32,7 +33,7 @@
     <div class="container-lg">
         <div class="footer-top">
             <div class="footer-author ">
-                <p>© Арина Крикунова {% now "Y" %}</p>   
+                <span class="author-name">© Арина Крикунова {% now "Y" %}</span>  
             </div>
             <a class="footer-icon-github" href="https://github.com/Arina345/mysite_2.git"><img src="{% static 'img/github.png'%}" alt="github"></a> 
                 

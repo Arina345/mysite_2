@@ -2,27 +2,50 @@
 {% load static %}
 
 
-
 {% block content  %}
-<div class="container_article">
-        <div class="article_list">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-6">
+            <div class="article_list">
             {% for article in articles %}
-            <div class="article">
-                <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
-                    <p class="article_pubdate">{{article.pubdate|date:"j M Y"}}</p>
-                    
-                    <a href="{{ article.get_absolute_url }}">
-                        <h1 class="article_title">
-                        {{article.title | safe}}
-                        </h1>
-                    </a>
-                <p class="article_summary">{{article.summary| safe}}</p>
-                <a href="{{article.get_category_url}}"><p class="article_category">#{{article.category}}</p></a>
+            <!-- Статьи -->
+            <div class="article item">
+                <div class="image">
+                    <a class="img" href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
+                </div>
+                <div class="content">
+                    <div class="block_top">
+
+                        <!-- Дата публикации -->
+                        <div class="block_date">
+                            <div class="date_item">{{article.pubdate|date:"j M Y"}}</div>
+                        </div>
+                        <!-- Дата публикации -->
+                        
+
+                        <!-- Заголовок статьи -->
+                        <p class="article_title"><a href="{{ article.get_absolute_url }}">{{article.title | safe}}</a></p> 
+                        <!-- Заголовок статьи -->
+
+                        <!-- summary -->
+                        <div class="article_text">
+                            <p>{{article.summary| safe}}</p>
+                        </div>
+                        <!-- summary -->
+                    </div>
+                    <div class="bottom_article">
+                        <div class="category">
+                            <a class="article_category" href="{{article.get_category_url}}">#{{article.category}}</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Статьи -->
             </div>
         </div>
-        {% endfor %}    
+    {% endfor %}
+    </div>
+    </div>
 </div>
-
 {% endblock  %}
 
 

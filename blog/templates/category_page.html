@@ -6,35 +6,86 @@
 
 
 {% block content  %}
-<div class="conteiner_article">
+<div class="container_article">
     <div class="path_category">
         <p class="path"><a href="{%url 'home_page' %}">Главная</a> / {{category}}</p>
     </div>
-        {% if category == 'Аналитика'%}
+    {% if category == 'Аналитика'%}
 
-            <div class="analytics">
-                <h1 class="category_analytics">Аналитика</h1>
-                <p class="category_analytics">Разбираем инструменты аналитики и основы профессии</p>
-                <img class="image_analytics" src="{% static 'img/analytics.jpg' %}" alt="analytics">
-            </div>
-        {% endif%}
-            <div class="article_list">
-                {% for article in articles %}
-                <div class="article">
-                    <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
-                        <p class="article_pubdate">{{article.pubdate|date:"j M Y"}}</p>
-                        
-                        <a href="{{ article.get_absolute_url }}">
-                            <h1 class="article_title">
-                            {{article.title | safe}}
-                            </h1>
-                        </a>
-                    <p class="article_summary">{{article.summary| safe}}</p>
-                    <a href="{{article.get_category_url}}"><p class="article_category">#{{article.category}}</p></a>
+    <div class="analytics">
+        <div class="analytics_text">
+            <h1 class="category_analytics">Аналитика</h1>
+            <p class="category_analytics">Разбираем инструменты аналитики и основы профессии</p>
+        </div>
+        <img class="analytics_image" src="{% static 'img/analytics.jpg' %}" alt="analytics">
+
+    </div>
+
+    {% elif category == 'Программирование'%}
+
+    <div class="cod">
+        <div class="cod_text">
+            <h1 class="category_cod">Программирование</h1>
+            <p class="category_cod">Разбор IT-профессий, советы новичкам и продвинутым спецам</p>
+        </div>
+        <img class="cod_image" src="{% static 'img/programmer.jpg' %}" alt="analytics">
+
+    </div>
+
+
+    {% elif category == 'Дизайн'%}
+
+    <div class="design">
+        <div class="design_text">
+            <h1 class="category_design">Дизайн</h1>
+            <p class="category_design">Говорим на языке дизайна и учимся делать красиво.</p>
+        </div>
+        <img class="design_image" src="{% static 'img/designer.jpg' %}" alt="analytics">
+
+    </div>
+
+    {% endif%}
+        <div class="article_list">
+            {% for article in articles %}
+            <!-- Статьи -->
+            <div class="article item">
+                <div class="image">
+                    <a class="img" href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" alt="foto"></a>
                 </div>
+                <div class="content">
+                    <div class="block_top">
+
+                        <!-- Дата публикации -->
+                        <div class="block_date">
+                            <div class="date_item">{{article.pubdate|date:"j M Y"}}</div>
+                        </div>
+                        <!-- Дата публикации -->
+                        
+
+                        <!-- Заголовок статьи -->
+                        <p class="article_title"><a href="{{ article.get_absolute_url }}">{{article.title | safe}}</a></p> 
+                        <!-- Заголовок статьи -->
+
+                        <!-- summary -->
+                        <div class="article_text">
+                            <p>{{article.summary| safe}}</p>
+                        </div>
+                        <!-- summary -->
+                    </div>
+                    <div class="bottom_article">
+                        <div class="category">
+                            <a class="article_category" href="{{article.get_category_url}}">#{{article.category}}</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Статьи -->
             </div>
-            {% endfor %}    
+        </div>
+        {% endfor %}
+
+  
 </div>
 
 {% endblock  %}
+
 
