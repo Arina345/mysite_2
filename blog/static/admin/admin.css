@@ -1,0 +1,29 @@
+#header, .module caption{
+    background: #34BBB2;
+}
+
+#main {
+    background: #181818;
+}
+
+
+#nav-sidebar{
+    background: #181818;
+}
+
+a:link, a:visited {
+    color: #EAEAEA;
+}
+
+div.breadcrumbs{
+    background: #1D1D1D;
+}
+
+
+
+
+#branding h1 a:link, #branding h1 a:visited {
+    color: #fff;
+    font-weight: bold;
+}
+

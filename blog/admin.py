@@ -1,26 +1,37 @@
 from django.contrib import admin
 from .models import Article
+from django.utils.safestring import mark_safe
+from django.contrib import messages
 
 
 class ChoiceInline(admin.TabularInline):
     model = Article
-    extra = 5
 
 
 class BlogAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {"fields": ["title"]}),
-        ("Date information", {"fields": ["pubdate"]}),
-        ("Full_text", {"fields": ["full_text"]}),
-        ("Category", {"fields": ["category"]}),
+        ("Дата публикации", {"fields": ["pubdate"]}),
+        ("Краткое содержание", {"fields": ["summary"]}),
+        ("Полный текст", {"fields": ["full_text"]}),
+        ("Категория", {"fields": ["category"]}),
         ("Slug", {"fields": ["slug"]}),
-        ("Image", {"fields": ["image"]}),
+        ("Фото", {"fields": ["image"]}),
+        ("Статус", {"fields": ["is_published"]}),
     ]
     list_display = ("title", "pubdate", "image", "category")
-    list_filter = ["pubdate", "category"]
-    search_fields = ["title"]
 
-    """ Добавление функций в действие """
+    list_filter = ["pubdate", "category", "is_published"]
+    search_fields = ["title"]
+    search_help_text = "Найти по названию статьи"
+    view_on_site = True
+
+    def get_html_photo(self, object):
+        if object.image:
+            return mark_safe(f"<img src='{object.image.url}' width=50>")
+
+    list_display = ("title", "pubdate", "get_html_photo", "category")
+    get_html_photo.short_description = "Фото"
 
     @admin.action(description="Опубликовать выбранные записи")
     def set_published(self, request, queryset):
@@ -35,8 +46,6 @@ class BlogAdmin(admin.ModelAdmin):
         )
 
     actions = ["set_published", "set_draft"]
-
-    """ Добавление функций в действие """
 
 
 admin.site.register(Article, BlogAdmin)

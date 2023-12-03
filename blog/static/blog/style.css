@@ -240,7 +240,7 @@ h1.category_design{
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 8px 0 rgb(233, 233, 233,0.7);
-  width: 325px;
+  width: 345px;
   height: 436px;
   
 }
@@ -380,7 +380,7 @@ p.article_title a:hover{
 .footer {
   position: absolute;
   width: 100%;
-  padding-bottom: 0;
+  padding-bottom: 1px;
   line-height: 60px; 
   background-color: #E2E4FF;
   font-family: Georgia, 'Times New Roman', Times, serif;
