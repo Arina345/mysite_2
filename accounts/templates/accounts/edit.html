@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Редактирование профиля{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="user-form">
+            <div class="profile-edit">
+                <h2>Настройки</h2>
+                <form method="post" enctype="multipart/form-data">
+                    <table>
+                        {{ user_form.as_table }}
+                        {{ profile_form.as_table }}
+                        {% csrf_token %}
+                    </table>
+                <p><input type="submit" value="Сохранить"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

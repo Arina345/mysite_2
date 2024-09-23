@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{request.user.first_name|default:request.user.username}}{% endblock %}
+
+<!-- Здесь будут статьи пользователя -->
+{% block content  %}
+<main>
+    <div class="container">
+        <div class="article-author">
+            <a href="{% url 'blog:article_list' %}">К другим статьям</a>
+        </div>
+        <div class="author-edit">
+        </div>
+    </div>
+</main>
+{% endblock %}

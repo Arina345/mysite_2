@@ -1,16 +1,17 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from blog import views
-
 from django.conf import settings
 from django.conf.urls.static import static
-from blog.views import home_page, article_page, category_page
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
+    path("accounts/", include("accounts.urls")),
+    path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
+    path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("admin/", admin.site.urls),
-    path("", views.home_page, name="home_page"),
-    path("blog/<slug:slug>", views.article_page, name="article_page"),
-    path("blog/category/<str:category>/", views.category_page, name="category_page"),
+    path("", include("blog.urls", namespace="blog")),
 ]
 
 if settings.DEBUG:

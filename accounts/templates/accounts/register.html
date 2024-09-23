@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Создание аккаунта{% endblock %}
+
+{% block content %}
+<main>
+  <div class="container">
+    <div class="user-form">
+      <div class="create-account">
+        <form method="post">
+          <h2>Создание аккаунта</h2>
+          <table>
+            {{ user_form.as_table}}
+          </table>
+          {% csrf_token %}
+          <p><input type="submit" value="Создать"></p>
+        </form>
+      </div>
+  </div>
+</div>
+</main>
+{% endblock %}

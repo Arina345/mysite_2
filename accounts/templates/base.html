@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-content">
+
+      <div class="logo">
+        <img src="{% static 'img/logo.png' %}" alt="logo">
+        <h1>Познания</h1>
+      </div>
+
+
+      <div class="menu-content">
+        {% if request.user.is_authenticated %}
+          <a href="{% url  'edit' %}" class="edit"><img src="{% static 'img/edit_icon.png' %}" alt="edit">Настройки</a>
+          <a href="{% url 'dashboard' %}" class="user">{{ request.user.first_name|default:request.user.username }}</a>
+          <a href="{% url 'logout' %}" class="exit">Выйти</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="entrance">Войти</a>
+        {% endif %}
+      </div>
+
+
+      <div class="burger-menu">
+          <span></span>
+      </div>
+      
+    </div>
+  </div>
+</header>
+{% if messages %}
+  <ul class="messages">
+  {% for message in messages %}
+    <li class="{{ message.tags }}">
+    {{ message|safe }}
+    </li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+
+    {% block content %}
+    {% endblock %}
+  
+    <script>
+      document.querySelector('.burger-menu').addEventListener('click', function(){
+          this.classList.toggle('active');
+          document.querySelector('.menu-content').classList.toggle('open');})
+  </script>
+</body>
+</html>
