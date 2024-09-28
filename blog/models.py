@@ -4,7 +4,10 @@ from django.urls import reverse
 from django.contrib import admin
 from django.utils import timezone
 from django.contrib.auth.models import User
-
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+from .fields import OrderField
 
 my_timezone = timezone.now()
 
@@ -28,8 +31,8 @@ class Article(models.Model):
         PUBLISHED = "PB", "Published"
 
     title = models.CharField(max_length=500, verbose_name="Название статьи")
-    summary = models.CharField(max_length=500, verbose_name="Анонс")
-    slug = models.CharField(max_length=255, unique=True)
+    summary = models.CharField(max_length=500, verbose_name="Превью")
+    slug = models.CharField(max_length=255, unique=True, verbose_name="URL")
     # Это поле определяет взаимосвязь многиек-одному, означающую,
     # что каждый пост написан пользователем и пользователь может написать любое число постов.
 
@@ -42,7 +45,7 @@ class Article(models.Model):
     # объекта User, используя обозначение user.article_posts.
 
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="article_posts"
+        User, on_delete=models.CASCADE, related_name="article_created"
     )
     full_text = models.TextField(verbose_name="Полный текст")
     publish = models.DateTimeField(default=my_timezone, verbose_name="Дата публикации")
@@ -55,7 +58,10 @@ class Article(models.Model):
     # Status.choices это ссылка на набор вариантов,
     # определенных в другом месте кода, вероятно, в отдельном Status классе или перечислении.
     status = models.CharField(
-        max_length=2, choices=Status.choices, default=Status.DRAFT
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT,
+        verbose_name="Статус",
     )
 
     def __str__(self):
@@ -69,3 +75,6 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse("blog:article_detail", args=[self.slug])
+
+
+# ------------------------------------------------------------------------------------------------------------------

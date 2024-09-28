@@ -39,10 +39,16 @@ def user_login(request):
 # Мы добавили в него декоратор login_required, поскольку только аутентифицированные пользователи могут
 # редактировать свои профили.
 
+from blog.models import Article
+
 
 @login_required
 def dashboard(request):
-    return render(request, "accounts/dashboard.html", {"section": "dashboard"})
+    profile = Profile.objects.get(user=request.user)
+    articles = Article.objects.filter(author=request.user)
+    return render(
+        request, "accounts/dashboard.html", {"profile": profile, "articles": articles}
+    )
 
 
 def edit(request):

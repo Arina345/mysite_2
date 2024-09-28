@@ -31,13 +31,3 @@ class BlogAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, BlogAdmin)
-
-
-# from .models import Profile
-
-
-# # Чтобы профиль появидся в базах данных
-# @admin.register(Profile)
-# class ProfileAdmin(admin.ModelAdmin):
-#     list_display = ["user", "date_registr", "photo"]
-#     raw_id_fields = ["user"]

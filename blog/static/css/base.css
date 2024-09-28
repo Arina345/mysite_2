@@ -2,6 +2,7 @@
     --black:#000000;
     --white: #F8F8F8;
     --gray:#15181F;
+    --gray_light:#A4A4A4;
   }
   
   
@@ -81,22 +82,29 @@
   color: var(--white);
 
 }
+.back_article{
+  margin-right: 15px;
+}
 
-.menu-content img{
-  width: 30px;
-  height: 30px;
+.back_article:hover{
+  background-color: var(--gray);
+}
+
+
+.menu-content  img{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  margin-right: 15px;
   vertical-align: middle;
-  margin-right: 10px;
-}
-  
-
-
-
-
-.user:hover,.edit:hover{
- background-color: var(--gray);
 }
 
+
+
+
+.user_account:hover{
+  background-color: var(--gray);
+}
 
   
 .exit{
@@ -111,7 +119,7 @@
 
 
 .exit:hover{
-  border: 1px solid #cececece;
+  border: 1px solid var(--gray_light);
 }
 
   
@@ -188,9 +196,11 @@ input[type=submit], a.button {
   color:#cc0033;
 
 }
+
+
 .helptext {
   display: none;
-  font-size:16px;
+  font-size:10px;
 }
 .user-registr{
   margin-top: 45px;
@@ -200,18 +210,13 @@ input[type=submit], a.button {
 
 .user-registr a{
   text-decoration: none;
-  color: var(--white);
+  color: #0735CD;
 }
 
 
 
 .user-registr a:hover{
   text-decoration: underline;
-}
-
-
-.create-account {
-
 }
 
 
@@ -253,8 +258,95 @@ ul.messages li.warning a { color:#f49000; }
 
 
 
+
+
+
+
+/* DASHBOARD */
+.user-profile{
+  display: flex;
+  justify-content: center;
+}
+
+.about-user{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: var(--gray);
+  width: 70%;
+  height: auto;
+  padding: 25px 30px 60px 30px;
+  border-radius: 15px;
+  margin-bottom: 45px;
+}
+
+
+.info-user{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+
+.info-user img{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  margin-right: 30px;
+}
+
+
+
+.info-user h2{
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.email{
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.date_registr{
+  font-size: 16px;
+  color: #A4A4A4;
+  margin-bottom: 20px;
+}
+
+
+.blog_description{
+  font-size: 18px;
+  line-height: 28px;
+}
+
+
+.edit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit{
+  text-decoration: none;
+  color: var(--white);
+  font-size: 16px;
+  border: 1px solid var(--white);
+  padding: 12px 14px;
+  border-radius: 50px;
+}
+
+.edit img{
+  width: 18px;
+  height: auto;
+  margin-right: 8px;
+}
+
+
+
+
 /* MAIN */
-  
 main{
   margin-top: 115px;
 }

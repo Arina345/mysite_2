@@ -6,7 +6,6 @@
 {% block content  %}
 <main>
    <div class="container">
-
       <div class="path_category">
          <p class="path"><a href="{% url 'blog:article_list'  %}">Главная</a> / {{article.title}}</p>
       </div>
@@ -22,9 +21,13 @@
                <h2>{{article.title| safe}}</h2>
                <p>{{article.summary| safe}}<p>
             </div>
+            {% if article.image %}
             <img src="{{article.image.url}}" alt="foto">
+            {% endif %}
             <!-- Полный текст -->
             <div class="article-fultext">{{article.full_text|safe}}
+            <a href="{% url 'blog:article_edit' article.slug %}">Редактировать</a>
+            <a href="{% url 'blog:article_delete' article.slug %}">Удалить статью</a>
          </div>
       </div>
    </div>

@@ -3,11 +3,18 @@
 {% block title %}Добро пожаловать{% endblock %}
 
 {% block content %}
-
 <main>
   <div class="container">
-     <h1>Добро пожаловать{{ new_user.first_name }}!</h1>
-     <p>Твой аккаунт был успешно создан. Теперь ты можешь войти в свой профиль <a href="{% url 'login' %}">Войти</a>.</p>
+     <h1>Добро пожаловать {{ new_user.first_name }}!</h1>
+     <p>Твой аккаунт был успешно создан. Теперь ты можешь войти в свой профиль</p>
+     <form action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <table>
+         {{ form.as_table  }}
+      </table>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <input type="submit" value="Войти">
+    </form>
   </div>
 </main>
 {% endblock %}
