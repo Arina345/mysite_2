@@ -1,31 +1,40 @@
-<!-- Здесь прописываются то, как будут выглядеть все статьи -->
+<!-- Здесь прописываются то, как будут выглядеть все статьи  на главной-->
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
-<main>
-    <div class="container">
-        <div class="article-items">
-            {% for article in articles %}
-            <a href="{{ article.get_absolute_url }}">
-                <div class="article-item">
-                    <div class="author-article">
-                        <p class="author-name">{{article.author}}</p>
-                        <p class="data">{{article.publish|date:"j M Y"}}</p>
-                    </div>
-                    <div class="article-about">
-                        <h1>{{article.title| safe}}</h1>
-                         <p>{{article.summary| safe}}</p>
-                    </div>
-                    {% if article.image %}
-                    <img src="{{article.image.url}}" alt="foto">
+<div class="article-items">
+    {% for article in articles%}
+    <div class="article-item">
+        <div class="author-article">
+            <a href="{% url 'dashboard_username' username=article.author %}">
+                <!-- article.author.profile -Этот оператор проверяет, есть ли у автора статьи профиль -->
+                <div>
+                    {% if article.author.profile and article.author.profile.photo %}
+                        <img src="{{article.author.profile.photo.url }} " alt="user-foto" class="author-img">
+                        {% else %}
+                        <img src="{% static 'img/user-photo.png' %} " alt="user-foto" class="author-img">
                     {% endif %}
                 </div>
+                <div>
+                    <p class="author-name">{{article.author}}</p>
+                    <p class="data">{{article.publish|date:"d.m.Y"}}</p>
+                </div>
             </a>
-            {% endfor%}
         </div>
+
+        <a href="{{article.get_absolute_url}}">
+            <div class="article-about">
+                <h1>{{article.title| safe}}</h1>
+                <p>{{article.summary| safe}}</p>
+            </div>
+            {% if article.image %}
+            <img src="{{article.image.url}}" alt="foto">
+            {% endif %}
+        </a>
     </div>
-</main>
+{% endfor %}
+</div>
 {% endblock %}
 
 

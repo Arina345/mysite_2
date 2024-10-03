@@ -1,44 +1,83 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Профиль ({{request.user.first_name|default:request.user.username}}){% endblock %}
+{% block title %}Профиль ({{user.username}}){% endblock %}
 
-<!-- Здесь будут статьи пользователя -->
+<!-- Здесь статьи пользователя -->
 {% block content  %}
-<main>
-    <div class="container">
-        <div class="user-profile">
-            <div class="about-user">
-                <div class="info-user">
+<div class="user-profile">
+    <!-- Профиль пользователя -->
+    <div class="about-user">
+        <div class="user-data">
+            <div>
+                {% if profile.photo %}
+                <img src="{{profile.photo.url}}" alt="user-foto">
+                {% else %}
+                <img src="{% static 'img/user-photo.png' %} " alt="user-foto" class="author-img">
+                {% endif %}
+            </div>
+            <div>
+                <h2>{{user.username}}</h2>
+                <!-- <h2>{{user.first_name}} {{user.last_name}}</h2> -->
+                <p class="email">{{user.email}}</p>
+                <p class="date_registr"> C {{profile.date_registr|date:"d.m.Y"}}</p>
+                <p class="blog_description">{{profile.blog_description|default:"Личный блог"}}</p>
+            </div>
+        </div>
+        {% if profile.user == request.user %}
+        <div class="user-action">
+            <a href="{% url  'edit' %}" class="edit">
+                <img src="{% static 'img/edit_icon.png' %}" alt="edit">
+                <p>Настройки</p>
+            </a>
+            <a href="{% url 'logout' %}" class="exit">Выйти</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="article-block">
+    <p>Статьи</p>
+</div>
+
+<!-- Статьи пользователя -->
+<div class="user-articles">
+    <div class="article-items">
+        {% for article in articles %}
+        <div class="article-item">
+            <div class="author-article">
+                <a href="{% url 'dashboard_username' username=article.author %}">
                     <div>
-                        {% if profile.photo %}
-                        <img src="{{profile.photo.url}}" alt="user-foto">
+                        {% if article.author.profile and article.author.profile.photo %}
+                        <img src="{{article.author.profile.photo.url }} " alt="user-foto" class="author-img">
                         {% else %}
-                        <img src="{% static 'img/user-foto.png' %}" alt="user-foto">
+                        <img src="{% static 'img/user-photo.png' %} " alt="user-foto" class="author-img">
                         {% endif %}
                     </div>
                     <div>
-                        <h2>{{user.first_name}} {{user.last_name}}</h2>
-                        <p class="email">{{user.email}}</p>
-                        <p class="date_registr"> C {{profile.date_registr|date:"d.m.Y"}}</p>
-                        <p class="blog_description">{{profile.blog_description|default:"Личный блог"}}</p>
+                        <p class="author-name">{{article.author}}</p>
+                        <p class="data">{{article.publish|date:"d.m.Y"}}</p>
                     </div>
-                </div>
-
-                <a href="{% url  'edit' %}" class="edit">
-                    <img src="{% static 'img/edit_icon.png' %}" alt="edit">
-                    <p>Настройки</p>
                 </a>
             </div>
-        </div>
-        <div>
-            <h2>Статьи</h2>
-            {% for article in articles %}
-            <div class="article-about">
-                <h1>{{article.title| safe}}</h1>
-                <p>{{article.summary| safe}}</p>
+            
+            <a href="{{article.get_absolute_url}}">
+                <div class="article-about">
+                    <h1>{{article.title| safe}}</h1>
+                    <p>{{article.summary| safe}}</p>
+                </div>
+                {% if article.image %}
+                <img src="{{article.image.url}}" alt="foto">
+                {% endif %}
+            </a>
+            {% if article.author == request.user %}
+            <div class="article-change">
+                <a href="{% url 'blog:article_edit' article.slug %}" class="edit_article">Редактировать</a>
+                <a href="{% url 'blog:article_delete' article.slug %}" class="delete">Удалить</a>
             </div>
-            {% endfor %}
-        </div>
+            {%  endif %}
+            
+    </div>    
+{% endfor %}
     </div>
-</main>
+</div>
 {% endblock %}

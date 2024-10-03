@@ -8,7 +8,7 @@ class Profile(models.Model):
     # blank=True поле необязательное и его можно оставить пустым
     date_registr = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(
-        upload_to="users/%Y/%m/%d/", verbose_name="Фотография", blank=True, null=True
+        upload_to="images", verbose_name="Фотография", blank=True, null=True
     )
     blog_description = models.TextField(
         max_length=250, blank=True, verbose_name="Описание блога"

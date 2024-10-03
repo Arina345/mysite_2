@@ -4,7 +4,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ArticleForm
 from .models import Article
 
 # UserEditForm, ProfileEditForm
@@ -19,12 +18,18 @@ from django.views.generic.list import ListView
 # В данном представлении извлекаются все посты со статусом PUBLISHED,
 # используя менеджер published, который мы создали ранее.
 
+from accounts.models import Profile
+
 
 def article_list(request):
     articles = Article.published.all()
     # render - сокращенный доступ
     # request, путь к шаблону,для прорисовки отображения статей
-    return render(request, "blog/article/list.html", {"articles": articles})
+    return render(
+        request,
+        "blog/article/list.html",
+        {"articles": articles},
+    )
 
 
 # Это представление детальной информации о посте.s
@@ -60,7 +65,8 @@ class ManageArticleListView(ListView):
     model = Article
     # отображение списка статей
     # template_name = "blog/manage/article/list.html"
-    template_name = "accounts/dashbosrd.html"
+    # template_name = "accounts/profile.html"
+    template_name = "accounts/dashboard.html"
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -94,7 +100,7 @@ class OwnerEditMixin:
 
 class OwnerArticleMixin(OwnerMixin):
     model = Article
-    fields = ["title", "slug", "summary", "status", "full_text"]
+    fields = ["title", "slug", "summary", "status", "full_text", "image"]
     # Здесь указывается URL-адрес, на который пользователь
     # должен быть перенаправлен после успешного создания или редактирования Article объекта.
     success_url = reverse_lazy("blog:article_list")
@@ -114,8 +120,9 @@ class OwnerArticleEditMixin(OwnerArticleMixin, OwnerEditMixin):
 # и определяет специальный атрибут template_name для шаблона, который
 # будет выводить список статей;
 class ManageArticleListView(OwnerArticleMixin, ListView):
-    template_name = template_name = "accounts/dashbosrd.html"
-    # permission_required = "blog.view_article"
+    # template_name = template_name = "accounts/profile.html"
+    template_name = template_name = "accounts/dashboard.html"
+    permission_required = "blog.view_article"
 
 
 # Создание статьи

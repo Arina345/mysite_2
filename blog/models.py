@@ -27,8 +27,8 @@ class Article(models.Model):
     published = PublishedManager()  # конкретно-прикладной менеджер
 
     class Status(models.TextChoices):
-        DRAFT = "DF", "Draft"
-        PUBLISHED = "PB", "Published"
+        DRAFT = "DF", "Черновик"
+        PUBLISHED = "PB", "Опубликовать"
 
     title = models.CharField(max_length=500, verbose_name="Название статьи")
     summary = models.CharField(max_length=500, verbose_name="Превью")
@@ -50,7 +50,7 @@ class Article(models.Model):
     full_text = models.TextField(verbose_name="Полный текст")
     publish = models.DateTimeField(default=my_timezone, verbose_name="Дата публикации")
     image = models.ImageField(
-        upload_to="images", null=True, verbose_name="Фотографии", blank=True
+        upload_to="images", null=True, verbose_name="Фотография превью", blank=True
     )
     update = models.DateTimeField(auto_now=True, verbose_name="Последнее обнавление")
 

@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Удалить статью{% endblock %}
+
+
+
 {% block content %}
- <h1>удалить "{{ object.title }}"</h1>
- <div class="module">
- <form action="" method="post">
- {% csrf_token %}
- <p>Вы действительно хотите удалить  "{{ object }}"?</p>
- <input type="submit" value="Удалить">
- </form>
- </div>
+<div class="user-form">
+    <div class="article-delete">
+        <h2>Вы действительно хотите удалить статью: {{ object }}?</h2>
+         <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Удалить">
+        </form>
+    </div>
+</div>
 {% endblock %}

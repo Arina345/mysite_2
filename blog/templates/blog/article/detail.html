@@ -1,36 +1,41 @@
 <!-- Здесь прописываются то, как будет выглядеть каждая отдельная статья -->
-
-
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content  %}
-<main>
-   <div class="container">
-      <div class="path_category">
-         <p class="path"><a href="{% url 'blog:article_list'  %}">Главная</a> / {{article.title}}</p>
-      </div>
-      <div class="article-choice">
-         <div class="article-item">
-            <!-- Автор -->
-            <div class="author-article">
-               <p class="author-name">{{article.author}}</p>
-               <p class="data">{{article.publish|date:"j M Y"}}</p>
-            </div>
-            <!-- О статье -->
-            <div class="article-about">
-               <h2>{{article.title| safe}}</h2>
-               <p>{{article.summary| safe}}<p>
-            </div>
-            {% if article.image %}
-            <img src="{{article.image.url}}" alt="foto">
-            {% endif %}
-            <!-- Полный текст -->
-            <div class="article-fultext">{{article.full_text|safe}}
-            <a href="{% url 'blog:article_edit' article.slug %}">Редактировать</a>
-            <a href="{% url 'blog:article_delete' article.slug %}">Удалить статью</a>
-         </div>
-      </div>
+   <div class="path_category">
+      <img src="{% static 'img/arrow-back.png' %}" alt="arrow-back">
+      <a href="{% url 'blog:article_list'  %}"> К статьям</a>
    </div>
-</main>
+   <div class="article-choice">
+      <div class="article-item">
+         <!-- Автор -->
+         <div class="author-article">
+            <a href="{% url 'dashboard_username' username=article.author %}">
+                  <div>
+                     {% if article.author.profile and article.author.profile.photo %}
+                        <img src="{{article.author.profile.photo.url }} " alt="user-foto" class="author-img">
+                        {% else %}
+                        <img src="{% static 'img/user-photo.png' %} " alt="user-foto" class="author-img">
+                     {% endif %}
+                  </div>
+                  <div>
+                     <p class="author-name">{{article.author}}</p>
+                     <p class="data">{{article.publish|date:"d.m.Y"}}</p>
+                  </div>
+            </a>
+         </div>
+         <!-- О статье -->
+         <div class="article-about">
+            <h1>{{article.title| safe}}</h1>
+            <p>{{article.summary| safe}}</p>
+        </div>
+         {% if article.image %}
+         <img src="{{article.image.url}}" alt="foto">
+         {% endif %}
+         <!-- Полный текст -->
+         <div class="article-fultext">{{article.full_text|safe}}</div>
+   </div>
 {% endblock  %} 
 

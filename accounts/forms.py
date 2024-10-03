@@ -15,7 +15,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["username", "first_name", "email"]
+        fields = ["username", "email"]
 
     # Валидация полей, чтобы проверить, что оба пароля одинаковы.
     def clean_password2(self):
@@ -32,7 +32,7 @@ class UserRegistrationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email"]
+        fields = ["username", "email"]
 
 
 # ProfileEditForm позволит пользователям редактировать данные профиля, сохраненные в конкретно-прикладной модели Profile.

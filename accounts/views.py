@@ -11,6 +11,11 @@ from .forms import (
 )
 from django.contrib import messages
 
+from blog.models import Article
+from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseNotFound
+
 
 # обработка входа пользователя
 def user_login(request):
@@ -39,19 +44,36 @@ def user_login(request):
 # Мы добавили в него декоратор login_required, поскольку только аутентифицированные пользователи могут
 # редактировать свои профили.
 
-from blog.models import Article
 
-
-@login_required
-def dashboard(request):
-    profile = Profile.objects.get(user=request.user)
-    articles = Article.objects.filter(author=request.user)
+def dashboard(request, username=None):
+    # Если username передан
+    if username:
+        # Функция попытается получить объект пользователя из базы данных
+        try:
+            user = User.objects.get(username=username)
+        # Если пользователь не найден, функция вернет ошибку 404 с сообщением "Пользователь не найден".
+        except User.DoesNotExist:
+            return HttpResponseNotFound("Пользователь не найден")
+    # Если пользователь найден, функция попытается получить профиль пользователя из базы данных
+    else:
+        user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+    # Если профиль не найден, функция установит profile в None.
+    except Profile.DoesNotExist:
+        profile = None
+    # Функция отфильтрует статьи, автором которых является текущий пользователь
+    articles = Article.objects.filter(author=user)
     return render(
-        request, "accounts/dashboard.html", {"profile": profile, "articles": articles}
+        request,
+        "accounts/dashboard.html",
+        {"user": user, "profile": profile, "articles": articles},
     )
 
 
+@login_required
 def edit(request):
+    profile = Profile.objects.get(user=request.user)
     # Когда пользователь отправляет форму,то происходит следующее:
     if request.method == "POST":
 
@@ -84,7 +106,7 @@ def edit(request):
     return render(
         request,
         "accounts/edit.html",
-        {"user_form": user_form, "profile_form": profile_form},
+        {"user_form": user_form, "profile_form": profile_form, "profile": profile},
     )
 
 
@@ -106,8 +128,11 @@ def register(request):
             # ---------------------------------------------------------------------------------------------------
             # Изменено accounts/register_done.html на accounts/dashboard.html
             Profile.objects.create(user=new_user)
+            form = LoginForm()
             return render(
-                request, "accounts/register_done.html", {"new_user": new_user}
+                request,
+                "accounts/register_done.html",
+                {"new_user": new_user, "form": form},
             )
     else:
         user_form = UserRegistrationForm()

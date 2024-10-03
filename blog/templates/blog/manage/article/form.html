@@ -3,21 +3,27 @@
 
 {% block title %}
   {% if object %}
-    Edit course "{{ object.title }}"
+    Редактирование статьи "{{ object.title }}"
   {% else %}
-    Создать статью
+    Создание статьи
   {% endif %}
 {% endblock %}
 
 {% block content %}
-  </h1>
-  <div class="new_article">
-    <form method="post">
-        <table>
-            {{ form.as_table }}
-            {% csrf_token %}
-        </table>
-      <p><input type="submit" value="Сохранить"></p>
-    </form>
+  <div class="user-form">
+    <div class="article-create">
+      {% if object %}
+      <h2>Редактирование статьи</h2>
+      {% else %}
+      <h2>Создание статьи</h2>
+      {% endif %}
+        <form method="post" enctype="multipart/form-data">
+          <table>
+              {{ form.as_table }}
+              {% csrf_token %}
+          </table>
+        <p><input type="submit" value="Сохранить"></p>
+      </form>
+    </div>
   </div>
 {% endblock %}
