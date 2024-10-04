@@ -8,11 +8,10 @@
         <h2>Настройки</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <table>
-                {{ user_form.as_table }}
-                {{ profile_form.as_table }}
-            </table>
-        <p><input type="submit" value="Сохранить"></p>
+                {{user_form}}
+                {{profile_form}}
+        <!-- <p><input type="submit" value="Сохранить"></p> -->
+        <button type="submit" class="btn btn-save-profile" value="Сохранить">Сохранить</button>
         </form>
     </div>
 </div>

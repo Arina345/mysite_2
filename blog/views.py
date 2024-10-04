@@ -8,12 +8,13 @@ from .models import Article
 
 # UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
-
+from django import forms
 
 # from .models import Profile
 from django.contrib import messages
 from django.views.generic.list import ListView
 
+from .forms import EditArticle
 
 # В данном представлении извлекаются все посты со статусом PUBLISHED,
 # используя менеджер published, который мы создали ранее.
@@ -100,7 +101,7 @@ class OwnerEditMixin:
 
 class OwnerArticleMixin(OwnerMixin):
     model = Article
-    fields = ["title", "slug", "summary", "status", "full_text", "image"]
+    form_class = EditArticle
     # Здесь указывается URL-адрес, на который пользователь
     # должен быть перенаправлен после успешного создания или редактирования Article объекта.
     success_url = reverse_lazy("blog:article_list")

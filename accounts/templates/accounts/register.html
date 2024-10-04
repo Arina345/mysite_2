@@ -7,11 +7,9 @@
   <div class="create-account">
     <form method="post">
       <h2>Создание аккаунта</h2>
-      <table>
-        {{ user_form.as_table}}
-      </table>
-      {% csrf_token %}
-      <p><input type="submit" value="Создать"></p>
+        {{ user_form}}
+        {% csrf_token %}
+      <button type="submit" class="btn btn-create-account" value="Создать">Создать</button>
     </form>
   </div>
 </div>

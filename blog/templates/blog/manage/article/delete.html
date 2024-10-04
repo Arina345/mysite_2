@@ -6,10 +6,10 @@
 {% block content %}
 <div class="user-form">
     <div class="article-delete">
-        <h2>Вы действительно хотите удалить статью: {{ object }}?</h2>
+        <h2>Вы действительно хотите удалить статью: "{{ object }}"?</h2>
          <form action="" method="post">
             {% csrf_token %}
-            <input type="submit" value="Удалить">
+            <button type="submit" class="btn btn-delete-article" value="Удалить">Удалить</button>
         </form>
     </div>
 </div>

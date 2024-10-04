@@ -18,11 +18,9 @@
       <h2>Создание статьи</h2>
       {% endif %}
         <form method="post" enctype="multipart/form-data">
-          <table>
-              {{ form.as_table }}
-              {% csrf_token %}
-          </table>
-        <p><input type="submit" value="Сохранить"></p>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-save-article" value="Сохранить">Сохранить</button>
       </form>
     </div>
   </div>
