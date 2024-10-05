@@ -27,14 +27,12 @@ class EditArticle(forms.ModelForm):
             "summary": forms.Textarea(
                 attrs={
                     "class": "input",
-                    "rows": 5,
                     "placeholder": "Введите краткое описание статьи",
                 }
             ),
             "full_text": forms.Textarea(
                 attrs={
                     "class": "input",
-                    "rows": 10,
                     "placeholder": "Введите полный текст статьи",
                 }
             ),

@@ -154,10 +154,17 @@
 .login-form h2,.create-account h2,.profile-edit h2,.article-create h2,.article-delete h2,.new-user h2{
   font-size: 24px;
   font-weight: normal;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
+.new-user p {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
 
+.new-user p:last-of-type{
+  margin-bottom: 20px;
+}
 
  
 form *{
@@ -168,7 +175,7 @@ form *{
  }
 
 
-.login-form,.create-account{
+.login-form,.create-account,.new-user{
   display: flex;
   flex-direction: column;
   width: 460px;
@@ -254,7 +261,7 @@ input[type=checkbox]{
   margin: 25px auto;
 }
 
-.btn-entrance,.btn-create-account,.btn-save-article,.btn-delete-article,.btn-save-profile{
+.btn-entrance,.btn-create-account,.btn-save-article,.btn-delete-article,.btn-save-profile,.btn-registr-done{
   background:linear-gradient(#0735CD,#5AC2FF);
   color:#fff;
   font-size:18px;
@@ -272,12 +279,6 @@ br{
 span.helptext{
   display: none;
 }
-
-.new-user p {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
 
 
 .errorlist {
@@ -385,13 +386,13 @@ ul.messages li.warning a { color:#f49000; }
 
 .user-data h2{
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .email{
   font-size: 18px;
   font-weight: normal;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .date_registr{
@@ -748,7 +749,7 @@ main{
     transition:all 4.s ease;
     padding: 10px 18px;
     border-radius: 5px;
-    width: 60%;
+    width: 45%;
     /* border: 1px solid red; */
   
   }
@@ -803,7 +804,7 @@ main{
 
   /* MAIN */
 main{
-  margin-top: 48px;
+  margin-top: 115px;
 }
   
 

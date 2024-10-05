@@ -2,23 +2,14 @@
 {% load static %}
 {% block title %}Добро пожаловать {{new_user.username}}!{% endblock %}
 
+
 {% block content %}
 <div class="user-form">
   <div class="new-user">
-    <h2>Добро пожаловать  {{new_user.username}}!</h2>
+    <h2>Добро пожаловать, {{new_user.username}}!</h2>
     <p>Ваш аккаунт был успешно создан.</p>
     <p>Теперь вы можете войти в свой профиль.</p>
-    <form action="{% url 'login' %}" method="post">
-      {% csrf_token %}
-      {{form}}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <input type="submit" value="Войти">
-    </form>
-    <div class="user-registr">
-      {% if form.errors %}
-        <p>Вы ввели неверный username или password.Попробуйте снова.</p>
-      {% endif %}
-    </div>
+    {% include 'accounts/login_form.html' %}
   </div>
   
 </div>

@@ -3,26 +3,17 @@
 {% block title %}Вход{% endblock %}
 
 {% block content %}
-
 <div class="user-form">
   <div class="login-form">
     <h2>Вход</h2>
-    <form action="{% url 'login' %}" method="post">
-      {% csrf_token %}
-        {{ form}}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <!-- <p><input type="submit" value="Войти"></p> -->
-      <button type="submit" class="btn btn-entrance" value="Войти">Войти</button>
-    </form>
+    {% include 'accounts/login_form.html' %}
     <div class="user-registr">
       {% if form.errors %}
         <p>Вы ввели неверный username или password.Попробуйте снова.</p>
       {% else %}
-        <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегестрироваться</a></p>
+        <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
       {% endif %}
     </div>
   </div>
 </div>
-
-  
 {% endblock %}

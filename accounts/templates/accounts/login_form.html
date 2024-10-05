@@ -1,0 +1,7 @@
+
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+    {{form}}
+  <input type="hidden" name="next" value="{{ next }}" />
+  <button type="submit" class="btn btn-entrance" value="Войти">Войти</button>
+</form>
