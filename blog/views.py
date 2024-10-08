@@ -8,18 +8,15 @@ from .models import Article
 
 # UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
-from django import forms
 
 # from .models import Profile
 from django.contrib import messages
 from django.views.generic.list import ListView
 
-from .forms import EditArticle
+from django import forms
 
 # В данном представлении извлекаются все посты со статусом PUBLISHED,
 # используя менеджер published, который мы создали ранее.
-
-from accounts.models import Profile
 
 
 def article_list(request):
@@ -99,9 +96,50 @@ class OwnerEditMixin:
         return super().form_valid(form)
 
 
-class OwnerArticleMixin(OwnerMixin):
+from django.forms import ClearableFileInput
+
+
+class MyClearableFileInput(ClearableFileInput):
+    template_name = "accounts/custom_clearable_file_input.html"
+    initial_text = ""
+    input_text = ""
+
+
+class EditArticleMixin:
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for field in form.fields:
+            if field == "title":
+                form.fields[field].widget.attrs[
+                    "placeholder"
+                ] = "Введите название статьи"
+
+            elif field == "slug":
+                form.fields[field].widget.attrs[
+                    "placeholder"
+                ] = "Введите название URL на англйиском языке"
+
+            elif field == "summary":
+                form.fields[field].widget = forms.Textarea(
+                    attrs={
+                        "placeholder": "Введите краткое описание статьи",
+                    }
+                )
+
+            elif field == "full_text":
+                form.fields[field].widget.attrs[
+                    "placeholder"
+                ] = "Введите полный текст статьи"
+
+            elif field == "image":
+                form.fields[field].widget = MyClearableFileInput()
+        return form
+
+
+class OwnerArticleMixin(OwnerMixin, EditArticleMixin):
     model = Article
-    form_class = EditArticle
+    # form_class = EditArticle
+    fields = ["title", "slug", "summary", "status", "full_text", "image"]
     # Здесь указывается URL-адрес, на который пользователь
     # должен быть перенаправлен после успешного создания или редактирования Article объекта.
     success_url = reverse_lazy("blog:article_list")
@@ -122,23 +160,22 @@ class OwnerArticleEditMixin(OwnerArticleMixin, OwnerEditMixin):
 # будет выводить список статей;
 class ManageArticleListView(OwnerArticleMixin, ListView):
     # template_name = template_name = "accounts/profile.html"
-    template_name = template_name = "accounts/dashboard.html"
-    permission_required = "blog.view_article"
+    template_name = "accounts/dashboard.html"
+    # permission_required = "blog.view_article"
 
 
 # Создание статьи
 class ArticleCreateView(OwnerArticleEditMixin, CreateView):
-    permission_required = "blog.add_article"
-    # pass
+    # permission_required = "blog.add_article"
+    pass
 
 
 # Редактирование статьи
 class ArticleUpdateView(OwnerArticleEditMixin, UpdateView):
-    permission_required = "blog.change_article"
-    # pass
+    # permission_required = "blog.change_article"
+    pass
 
 
 # Удаление статьи
 class ArticleDeleteView(OwnerArticleMixin, DeleteView):
     template_name = "blog/manage/article/delete.html"
-    permission_required = "blog.delete_article"

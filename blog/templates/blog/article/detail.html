@@ -28,7 +28,7 @@
             <p>{{article.summary| safe}}</p>
         </div>
          {% if article.image %}
-         <img src="{{article.image.url}}" alt="foto">
+         <p><img  src="{{article.image.url}}"  alt="foto" class="article-foto"></p>
          {% endif %}
          <!-- Полный текст -->
          <div class="article-fultext">{{article.full_text|safe}}</div>
